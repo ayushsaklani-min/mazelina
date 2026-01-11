@@ -1,0 +1,14 @@
+/mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/deps/serde-b0cdd9f2e1aeed54.d: /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/build/serde-5ca1fae16de1aae6/out/private.rs
+
+/mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/deps/libserde-b0cdd9f2e1aeed54.rlib: /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/build/serde-5ca1fae16de1aae6/out/private.rs
+
+/mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/deps/libserde-b0cdd9f2e1aeed54.rmeta: /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/build/serde-5ca1fae16de1aae6/out/private.rs
+
+/home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/saklani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/build/serde-5ca1fae16de1aae6/out/private.rs:
+
+# env-dep:OUT_DIR=/mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/release/build/serde-5ca1fae16de1aae6/out

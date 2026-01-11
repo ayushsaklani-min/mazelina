@@ -1,0 +1,1 @@
+/mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/target/wasm32-unknown-unknown/release/mazestepper_multiplayer.wasm: /mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/src/lib.rs /mnt/c/Users/sakla/OneDrive/Desktop/mazeeeelinera/src/state.rs
