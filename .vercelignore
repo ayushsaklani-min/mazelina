@@ -1,0 +1,13 @@
+target/
+.git/
+.cargo/
+Cargo.lock
+*.wasm
+*.toml
+src/
+deploy.sh
+deploy-wsl.bat
+play.sh
+play-wsl.bat
+*.md
+!README.md

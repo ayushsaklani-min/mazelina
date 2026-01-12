@@ -16,3 +16,12 @@ opt-level = "s"
 lto = true
 panic = "abort"
 codegen-units = 1
+
+[profile.release.package."*"]
+opt-level = "s"
+
+# Force older WASM features to avoid opcode 252
+[target.wasm32-unknown-unknown]
+rustflags = [
+    "-C", "target-feature=-reference-types,-bulk-memory,-mutable-globals"
+]

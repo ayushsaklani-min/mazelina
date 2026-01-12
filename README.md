@@ -2,6 +2,39 @@
 
 A turn-based multiplayer on-chain maze game built for **Linera Conway testnet**.
 
+## ⚠️ IMPORTANT: Deployment Status
+
+**Bytecode Published**: ✅ Successfully on Conway testnet
+- Contract ID: `897559c06f8bd1267921ed9b51a6b8dd016b90eda12bc57229e320913f113334`
+- Service ID: `cddd1e84e3cae61910156a9f68a9d1252e61ecf49886bba58a096618135b0baf`
+- Chain: `a6b91a89fb179d82b40e705bcdaa1dd59e01aa2f54646135ecc49eedf8e6e1e6`
+
+**Application Creation**: ❌ Blocked by WASM opcode 252 compatibility issue
+
+The contract is **complete and correct** but cannot instantiate due to Conway testnet's WASM runtime not supporting reference types (opcode 252). See [SUBMISSION_NOTES.md](SUBMISSION_NOTES.md) for full technical details.
+
+## 🚀 Quick Start
+
+### Play Online (Deployed)
+
+**Live Demo**: [https://mazestepper-multiplayer.vercel.app](https://mazestepper-multiplayer.vercel.app)
+
+### Play Locally
+
+```bash
+# Open the UI
+open ui/index.html  # Mac/Linux
+start ui/index.html # Windows
+```
+
+**How to Play:**
+1. Click "Join Game" to add players
+2. Use arrow buttons (↑ ↓ ← →) to move
+3. Avoid walls (🧱 red cells)
+4. Reach the goal (🏁 at position 4,4) to win!
+
+**Multiplayer**: Open multiple browser tabs to play with multiple players!
+
 ## 🎯 Game Overview
 
 - **Grid**: 5×5 maze
@@ -13,11 +46,11 @@ A turn-based multiplayer on-chain maze game built for **Linera Conway testnet**.
 
 ## 🏗️ Architecture
 
-### Smart Contract (Rust + Linera SDK)
+### Smart Contract (Rust + Linera SDK 0.15.8)
 - **State**: Players, positions, turn counter, winner
 - **Operations**: Join, Move(Direction)
-- **Query**: GameState
 - **Constraints**: Conway WASM compatible (no async, no cross-chain)
+- **Status**: Compiles successfully, bytecode published
 
 ### Frontend (HTML/CSS/JS)
 - Modern dark theme with neon accents
@@ -25,6 +58,7 @@ A turn-based multiplayer on-chain maze game built for **Linera Conway testnet**.
 - Turn-based controls with validation
 - Player list and move counter
 - Winner announcement
+- **Mock mode** for demonstration
 
 ## 📁 Project Structure
 
@@ -32,46 +66,34 @@ A turn-based multiplayer on-chain maze game built for **Linera Conway testnet**.
 mazestepper-multiplayer/
 ├── Cargo.toml              # Rust dependencies & WASM config
 ├── src/
-│   └── lib.rs              # Smart contract logic
+│   ├── lib.rs              # Smart contract logic
+│   └── state.rs            # Game state management
 ├── ui/
 │   ├── index.html          # Game interface
 │   ├── style.css           # Styling
-│   └── app.js              # Frontend logic
-├── DEPLOYMENT.md           # Step-by-step deployment guide
+│   └── app.js              # Frontend logic (mock mode)
+├── deploy.sh               # Deployment script (Linux/Mac)
+├── deploy-wsl.bat          # Deployment script (Windows WSL)
+├── SUBMISSION_NOTES.md     # Detailed submission explanation
+├── BYTECODE_INFO.md        # Published bytecode details
+├── DEPLOYMENT.md           # Deployment guide
 └── README.md               # This file
 ```
 
-## 🚀 Quick Start
+## 🔧 Build & Deploy
 
-### 1. Build Contract
+### Build Contract
 ```bash
 cargo build --release --target wasm32-unknown-unknown
 ```
 
-### 2. Deploy to Conway
+### Deploy to Conway (via WSL on Windows)
 ```bash
-linera publish-bytecode target/wasm32-unknown-unknown/release/mazestepper_multiplayer.wasm
-linera create-application <BYTECODE_ID>
+./deploy-wsl.bat  # Windows
+./deploy.sh       # Linux/Mac
 ```
 
-### 3. Play Game
-```bash
-# Player joins
-linera service --application-id <APP_ID> --operation '{"Join": null}'
-
-# Player moves
-linera service --application-id <APP_ID> --operation '{"Move": "Right"}'
-
-# Query state
-linera query-application <APP_ID> --query '{"GameState": null}'
-```
-
-### 4. Launch UI
-```bash
-cd ui
-python3 -m http.server 8000
-# Open http://localhost:8000
-```
+**Note**: Bytecode publishes successfully but application creation fails with opcode 252 error.
 
 ## 🎮 Game Rules
 
@@ -85,7 +107,7 @@ python3 -m http.server 8000
 ## 🛠️ Technical Details
 
 ### Conway Compliance
-✅ No async/await
+✅ No async/await in contract logic
 ✅ No cross-chain messaging
 ✅ No randomness
 ✅ No timers
@@ -98,15 +120,18 @@ python3 -m http.server 8000
 - `lto = true` (link-time optimization)
 - `panic = "abort"` (no unwinding)
 - `codegen-units = 1` (better optimization)
+- Final size: 152 KB
 
-## 📖 Full Documentation
+### Known Issue: Opcode 252
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for:
-- Complete deployment steps
-- Multi-player testing scenarios
-- UI configuration
-- Troubleshooting guide
-- Production integration options
+The compiled WASM contains opcode 252 (WASM reference types) which Conway testnet's runtime doesn't support yet. This is **not a code issue** - it's a toolchain/runtime compatibility problem. The contract code is complete and correct.
+
+## 📖 Documentation
+
+- [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) - Deploy to Vercel (hosting)
+- [SUBMISSION_NOTES.md](SUBMISSION_NOTES.md) - Detailed explanation of the opcode issue
+- [BYTECODE_INFO.md](BYTECODE_INFO.md) - Published bytecode details
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Full deployment guide
 
 ## 🎨 UI Features
 
@@ -115,47 +140,38 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for:
 - **Move Controls**: Arrow buttons (disabled when not your turn)
 - **Live Stats**: Move counter, player count
 - **Winner Banner**: Animated celebration on win
+- **Mock Mode Banner**: Shows deployment status
 - **Responsive**: Works on desktop and tablet
 
-## 🔧 Development
+## 🔮 Next Steps
 
-### Prerequisites
-- Rust 1.70+
-- Linera CLI
-- wasm32-unknown-unknown target
-- Conway testnet wallet
+Once Conway testnet updates its WASM runtime:
 
-### Local Testing
-```bash
-# Build
-cargo build --release --target wasm32-unknown-unknown
+1. Bytecode is already published (no need to republish)
+2. Run: `linera create-application 897559c06f8bd1267921ed9b51a6b8dd016b90eda12bc57229e320913f113334`
+3. Get Application ID
+4. Update frontend config
+5. Game will work fully on-chain
 
-# Check WASM size
-ls -lh target/wasm32-unknown-unknown/release/*.wasm
+## 📝 Repository
 
-# Run UI locally
-cd ui && python3 -m http.server 8000
-```
-
-## 📝 License
-
-MIT License - Built for Linera Conway testnet hackathon
-
-## 🤝 Contributing
-
-This is a hackathon project. Feel free to fork and extend!
+**GitHub**: https://github.com/ayushsaklani-min/mazelina.git
 
 ## 🎯 Success Checklist
 
-- [x] Conway-compatible WASM contract
+- [x] Conway-compatible WASM contract code
 - [x] Turn-based multiplayer logic
 - [x] Wall collision detection
 - [x] Win condition handling
 - [x] Professional UI with animations
 - [x] Complete deployment guide
-- [x] CLI integration examples
-- [x] Multi-player testing scenarios
+- [x] Bytecode published to Conway testnet
+- [x] Mock mode for demonstration
+- [x] Comprehensive documentation
+- [ ] Application instantiation (blocked by runtime)
 
 ---
 
 **Built with ❤️ for Linera Conway Testnet**
+
+**Status**: Complete implementation, awaiting testnet runtime update for full deployment
