@@ -3,28 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MazeStepper Multiplayer</title>
+    <title>MazeStepper Multiplayer - Linera Blockchain</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <canvas id="particles-canvas"></canvas>
+    <div class="stars"></div>
     <div class="container">
         <header>
-            <h1 class="title">🎮 MazeStepper Multiplayer</h1>
-            <p class="subtitle">Turn-Based On-Chain Maze Game</p>
+            <div class="logo-container">
+                <div class="logo-glow"></div>
+                <h1 class="title">
+                    <span class="title-icon">⚡</span>
+                    <span class="title-text">MazeStepper</span>
+                    <span class="title-badge">MULTIPLAYER</span>
+                </h1>
+            </div>
+            <p class="subtitle">
+                <span class="subtitle-highlight">Turn-Based</span> On-Chain Maze Game
+                <span class="chain-badge">🔗 Linera Blockchain</span>
+            </p>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-dot"></span>
+                    <span>Live on Conway Testnet</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">⚡</span>
+                    <span>Real-time Gameplay</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">🔐</span>
+                    <span>Blockchain Secured</span>
+                </div>
+            </div>
         </header>
 
         <div class="game-layout">
             <!-- Left Panel: Game Info -->
             <div class="info-panel">
-                <div class="card">
+                <div class="card stat-card">
                     <h2>📊 Game Status</h2>
-                    <div class="stat">
-                        <span class="label">Total Moves:</span>
-                        <span class="value" id="total-moves">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="label">Players:</span>
-                        <span class="value" id="player-count">0</span>
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Total Moves</span>
+                                <span class="stat-value" id="total-moves">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-content">
+                                <span class="stat-label">Active Players</span>
+                                <span class="stat-value" id="player-count">0</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -43,28 +80,62 @@
                 </div>
 
                 <div class="card actions">
-                    <button id="join-btn" class="btn btn-primary">Join Game</button>
-                    <button id="refresh-btn" class="btn btn-secondary">Refresh State</button>
+                    <button id="join-btn" class="btn btn-primary">
+                        <span class="btn-icon">🎮</span>
+                        <span class="btn-text">Join Game</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                    <button id="refresh-btn" class="btn btn-secondary">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">Refresh State</span>
+                    </button>
                 </div>
             </div>
 
             <!-- Center: Maze Grid -->
             <div class="maze-container">
                 <div id="winner-banner" class="winner-banner hidden">
-                    🏆 <span id="winner-text"></span> WINS! 🏆
+                    <div class="winner-content">
+                        <div class="trophy-animation">🏆</div>
+                        <div class="winner-text-container">
+                            <div class="winner-title">VICTORY!</div>
+                            <div class="winner-player" id="winner-text"></div>
+                        </div>
+                        <div class="confetti"></div>
+                    </div>
                 </div>
-                <div id="maze-grid" class="maze-grid"></div>
+                
+                <div class="maze-wrapper">
+                    <div class="maze-glow"></div>
+                    <div id="maze-grid" class="maze-grid"></div>
+                </div>
                 
                 <!-- Controls -->
                 <div class="controls">
-                    <div class="control-row">
-                        <button id="btn-up" class="btn-control" data-direction="Up">↑</button>
+                    <div class="controls-title">Movement Controls</div>
+                    <div class="control-grid">
+                        <div class="control-row">
+                            <button id="btn-up" class="btn-control" data-direction="Up">
+                                <span class="btn-arrow">↑</span>
+                                <span class="btn-label">UP</span>
+                            </button>
+                        </div>
+                        <div class="control-row">
+                            <button id="btn-left" class="btn-control" data-direction="Left">
+                                <span class="btn-arrow">←</span>
+                                <span class="btn-label">LEFT</span>
+                            </button>
+                            <button id="btn-down" class="btn-control" data-direction="Down">
+                                <span class="btn-arrow">↓</span>
+                                <span class="btn-label">DOWN</span>
+                            </button>
+                            <button id="btn-right" class="btn-control" data-direction="Right">
+                                <span class="btn-arrow">→</span>
+                                <span class="btn-label">RIGHT</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="control-row">
-                        <button id="btn-left" class="btn-control" data-direction="Left">←</button>
-                        <button id="btn-down" class="btn-control" data-direction="Down">↓</button>
-                        <button id="btn-right" class="btn-control" data-direction="Right">→</button>
-                    </div>
+                    <div class="keyboard-hint">💡 Use keyboard arrows too!</div>
                 </div>
             </div>
 
